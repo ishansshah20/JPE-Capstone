@@ -17,6 +17,11 @@ public class OrderController {
         this.defaultOrderService = defaultOrderService;
     }
 
+    @GetMapping(path = "/")
+    public String helloWorld() {
+        return "Hello World";
+    }
+
     @GetMapping("/byId")
     public Optional<OrderInfo> getOrderById(@RequestParam("id") String orderId){
         return defaultOrderService.getOrder(orderId);
