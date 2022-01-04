@@ -1,4 +1,9 @@
+FROM maven:3.6.0-jdk-11-slim AS build
+COPY src /home/app/src
+COPY pom.xml /home/app
+RUN mvn -f /home/app/pom.xml clean package
+
 FROM openjdk:15
-ADD target/JPE-Capstone.jar JPE-Capstone.jar
 EXPOSE 8085
-ENTRYPOINT ["java", "-jar", "JPE-Capstone.jar"]
+COPY --from=build home/app/target/JPE-Capstone.jar /usr/local/lib/JPE-Capstone.jar
+ENTRYPOINT ["java", "-jar", "/usr/local/lib/JPE-Capstone.jar"]
