@@ -1,24 +1,13 @@
-#version: '3'
-#services:
-#  ecommerce_db:
-#    image: 'postgres'
-#    container_name: postgres_db
-#    ports:
-#      - "5432:5432"
-#    environment:
-#      - POSTGRES_USER=postgres
-#      - POSTGRES_PASSWORD=root
-#      - POSTGRES_DB=order_db
-
-#  app:
-#    image: jpe-capstone
-#    container_name: jpe-capstone
-#    build: ./
-#    ports:
-#      - "8085:8085"
-#    depends_on:
-#      - ecommerce_db
-#    environment:
-#      - SPRING_DATASOURCE_URL=jdbc:postgresql://ecommerce_db:5432/order_db
-#      - SPRING_DATASOURCE_USERNAME=admin
-#      - SPRING_DATASOURCE_PASSWORD=root
+version: '3'
+services:
+  jpe-app:
+    image: jpe-app
+    container_name: jpe-app
+    build: ./
+    ports:
+      - "8085:80"
+    environment:
+      - DB_SERVER=3.144.190.241:5432
+      - DB_USERNAME=admin
+      - DB_PASSWORD=root
+      - DB_NAME=order_db
